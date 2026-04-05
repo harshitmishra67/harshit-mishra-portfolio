@@ -1,4 +1,4 @@
-const elements = document.querySelectorAll('.reveal');
+const elements = document.querySelectorAll('.fade-up');
 
 const observer = new IntersectionObserver(entries => {
   entries.forEach(entry => {
@@ -24,7 +24,7 @@ function typeName() {
   if (nameIndex < nameText.length) {
     nameEl.textContent += nameText.charAt(nameIndex);
     nameIndex++;
-    setTimeout(typeName, 150);
+    setTimeout(typeName, 100);
   } else {
     typeRoles();
   }
@@ -37,7 +37,7 @@ function typeRoles() {
   if (charIndex < currentRole.length) {
     rolesEl.textContent += currentRole.charAt(charIndex);
     charIndex++;
-    setTimeout(typeRoles, 100);
+    setTimeout(typeRoles, 60);
   } else {
     setTimeout(() => {
       rolesEl.textContent = "";
@@ -49,19 +49,19 @@ function typeRoles() {
 }
 
 typeName();
+
 let skillsSection = document.querySelector(".skills");
 
 window.addEventListener("scroll", () => {
+  if (!skillsSection) return;
   let sectionTop = skillsSection.offsetTop;
-  let sectionHeight = skillsSection.clientHeight;
   let scrollY = window.scrollY;
   let windowHeight = window.innerHeight;
 
   if (scrollY + windowHeight > sectionTop + 100) {
-    
-    document.querySelector(".html").style.width = "90%";
-    document.querySelector(".css").style.width = "85%";
-    document.querySelector(".js").style.width = "70%";
-    document.querySelector(".cpp").style.width = "75%";
+    const bars = document.querySelectorAll(".progress-fill");
+    bars.forEach(bar => {
+      bar.style.width = bar.dataset.width;
+    });
   }
 });
